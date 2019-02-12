@@ -9,7 +9,7 @@ namespace DelegateNetwork
     public class PersonHandlerEventArgs
     {
         public string Source { get; set; } //Источник
-        public string  Changes { get; set; } //Что произошло
+        public string Changes { get; set; } //Что произошло
         public DateTime Time { get; set; } //Время события
         public string Information { get; set; } //Доп. информация
 
