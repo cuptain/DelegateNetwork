@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DelegateNetwork
 {
-    class Message //Класс сообщения об обновлении
+    class JournalEntry //Класс сообщения об обновлении
     {
-        public Message(string _source, string _changes, DateTime _time, string _info) //Конструктор
+        public JournalEntry(string _source, string _changes, DateTime _time, string _info) //Конструктор
         {
             Source = _source;
             Changes = _changes;
