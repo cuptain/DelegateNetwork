@@ -6,7 +6,32 @@ using System.Threading.Tasks;
 
 namespace DelegateNetwork
 {
-    class Message
+    class Message //Класс сообщения об обновлении
     {
+        public Message(string _source, string _changes, DateTime _time, string _info) //Конструктор
+        {
+            Source = _source;
+            Changes = _changes;
+            Time = _time;
+            Information = _info;
+        }
+
+        private readonly string Source;
+
+        private readonly string Changes;
+
+        private readonly DateTime Time;
+
+        private readonly string Information;
+
+        public override string ToString() //Нормальный вывод
+        {
+            string output = "";
+            output += "Сообщение о событии у " + Source + "\n";
+            output += "        Тип события: " + Changes + "\n";
+            output += "        Что произошло: " + Information + "\n";
+            output += "        Время: " + Time.ToShortTimeString() + " " + Time.ToShortDateString() + "\n";
+            return output;
+        }
     }
 }

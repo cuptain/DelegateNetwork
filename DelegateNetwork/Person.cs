@@ -31,6 +31,20 @@ namespace DelegateNetwork
 
         public event PersonHandler PersonChanged; //Событие
 
+        public Person(string _name, DateTime _birth, TGender _gender, string _school, string _university, TStatus _status) //Конструктор
+        {
+            fullName = _name;
+            gender = _gender;
+            birthDate = _birth;
+            school = _school;
+            university = _university;
+            martialStatus = _status;
+            journal = new Journal(FIO);
+            friends = new List<Person>();
+            news = new List<string>();
+            pictures = new List<string>();
+        }
+
         public void OnPersonChanged(object source, PersonHandlerEventArgs args) //Фиксатор изменений
         {
             PersonChanged(source, args);
@@ -117,5 +131,7 @@ namespace DelegateNetwork
             }
         }
         #endregion
+
+
     }
 }
