@@ -39,7 +39,7 @@ namespace DelegateNetwork
             school = _school;
             university = _university;
             martialStatus = _status;
-            journal = new Journal(FIO);
+            journal = new Journal(fullName);
             friends = new List<Person>();
             news = new List<string>();
             pictures = new List<string>();
@@ -132,6 +132,64 @@ namespace DelegateNetwork
         }
         #endregion
 
+        #region Methods
+        public void AddFriend(ref Person newFriend) //Добавление друга
+        {
+            friends.Add(newFriend);
+            newFriend.PersonChanged += journal.JournalChanged;
+            newFriend.journal.Add(new JournalEntry(fullName, "Новости, Добавление друга", DateTime.Now, $"{fullName} подписался на вас"));
+            OnPersonChanged(this,
+               new PersonHandlerEventArgs(fullName, "Новости, Добавление друга", DateTime.Now, $"{fullName} подписался на {newFriend.fullName}"));
+            CheckBirth(this);
+            CheckBirth(newFriend);
+        }
 
+        public void DeleteFriend(ref Person oldFriend) //Удаление друга
+        {
+            friends.Remove(oldFriend);
+            oldFriend.PersonChanged -= journal.JournalChanged;
+            oldFriend.journal.Add(new JournalEntry(fullName, "Новости, Удаление друга", DateTime.Now, $"{fullName} удалил вас из друзей"));
+            OnPersonChanged(this,
+                new PersonHandlerEventArgs(fullName, "Новости, Удалил друга", DateTime.Now, $"{fullName} удалил друга {oldFriend.fullName}"));
+            CheckBirth(this);
+        }
+
+        public void AddNews(string newNews) //Добавление новости
+        {
+            news.Add(newNews);
+            OnPersonChanged(this,
+                new PersonHandlerEventArgs(fullName, "Новости, Добавление новости", DateTime.Now, $"{fullName} добавил новость \"{newNews}\""));
+            CheckBirth(this);
+        }
+
+        public void DeleteNews(string uselessNews) //Удаление новости
+        {
+            news.Remove(uselessNews);
+            OnPersonChanged(this,
+                new PersonHandlerEventArgs(fullName, "Новости, Удаление новости", DateTime.Now, $"{fullName} удалил новость \"{uselessNews}\""));
+            CheckBirth(this);
+        }
+
+        public void AddPicture(string newPicture) //Добавление фотографии
+        {
+            pictures.Add(newPicture);
+            OnPersonChanged(this,
+                new PersonHandlerEventArgs(fullName, "Новости, Добавлена новая фотография", DateTime.Now, $"{fullName} добавил фотографию \"{newPicture}\""));
+            CheckBirth(this);
+        }
+
+        public void DeletePicture(string uselessPicture) //Удаление фотографии
+        {
+            pictures.Remove(uselessPicture);
+            OnPersonChanged(this,
+                new PersonHandlerEventArgs(fullName, "Новости, Удалена фотография", DateTime.Now, $"{fullName} удалил фотографию \"{uselessPicture}\""));
+            CheckBirth(this);
+        }
+        #endregion
+
+        public string Show() //Вывод сообщений о человеке
+        {
+            return journal.ToString();
+        }
     }
 }
