@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace DelegateNetwork
 {
-    public enum TGender { MAN, WOMAN } //Пол
-    public enum TStatus { NOT_CHOSEN, NOT_MARRIED, IN_RELATIONSHIP, ENGAGED, MARRIED, IN_LOVE, COMPLICATED, IN_ACTIVE_SEARCH, LONELY_LOOSER } //Семейные положения
-
     public delegate void PersonHandler(object source, PersonHandlerEventArgs args); //Делегат
 
     public class Person
@@ -16,10 +13,10 @@ namespace DelegateNetwork
         #region Properties
         private string fullName; //ФИО
         private DateTime birthDate; //Дата рождения
-        private TGender gender; //Пол
+        private string gender; //Пол
         private string school; //Школа
         private string university; //Университет
-        private TStatus martialStatus; //Семейное положение
+        private string martialStatus; //Семейное положение
         #endregion
 
         #region Fields
@@ -31,7 +28,7 @@ namespace DelegateNetwork
 
         public event PersonHandler PersonChanged; //Событие
 
-        public Person(string _name, DateTime _birth, TGender _gender, string _school, string _university, TStatus _status) //Конструктор
+        public Person(string _name, DateTime _birth, string _gender, string _school, string _university, string _status) //Конструктор
         {
             fullName = _name;
             gender = _gender;
@@ -84,7 +81,7 @@ namespace DelegateNetwork
             }
         }
 
-        public TGender Gender //Смена пола
+        public string Gender //Смена пола
         {
             get => gender;
             set {
@@ -119,7 +116,7 @@ namespace DelegateNetwork
             }
         }
 
-        public TStatus MartialStatus //Смена семейного положения
+        public string MartialStatus //Смена семейного положения
         {
             get => martialStatus;
             set
