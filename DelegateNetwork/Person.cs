@@ -44,7 +44,10 @@ namespace DelegateNetwork
 
         public void OnPersonChanged(object source, PersonHandlerEventArgs args) //Фиксатор изменений
         {
-            PersonChanged(source, args);
+            if (PersonChanged != null)
+            {
+                PersonChanged(source, args);
+            }
         }
 
         #region SelfInfoChanges

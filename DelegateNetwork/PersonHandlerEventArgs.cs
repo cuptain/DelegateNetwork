@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DelegateNetwork
 {
-    public class PersonHandlerEventArgs
+    public class PersonHandlerEventArgs : EventArgs
     {
         public string Source { get; set; } //Источник
         public string Changes { get; set; } //Что произошло
